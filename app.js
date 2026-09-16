@@ -1,6 +1,7 @@
-const a = await (await fetch("/gz-a.txt")).text();
-const b = await (await fetch("/gz-b.txt")).text();
-const _gz = Uint8Array.from(atob(a + b), c => c.charCodeAt(0));
+const base = "https://cdn.jsdelivr.net/gh/austra/irata-outpost-static@main";
+const a = await (await fetch(base + "/gz-a.txt")).text();
+const b = await (await fetch(base + "/gz-b.txt")).text();
+const _gz = Uint8Array.from(atob(a + b), (c) => c.charCodeAt(0));
 const _ds = new DecompressionStream("gzip");
 const _stream = new Blob([_gz]).stream().pipeThrough(_ds);
 const _code = await new Response(_stream).text();

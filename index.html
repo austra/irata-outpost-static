@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Irata Outpost</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      html,
+      body {
+        background:
+          radial-gradient(1200px 600px at 10% -10%, rgba(251, 191, 36, 0.08), transparent 50%),
+          radial-gradient(900px 500px at 110% 10%, rgba(56, 189, 248, 0.08), transparent 45%),
+          #0b1210;
+        color: #f4f1ea;
+        min-height: 100%;
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, sans-serif;
+      }
+      .font-display {
+        font-family: Georgia, "Times New Roman", serif;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@19.2.8",
+          "react-dom": "https://esm.sh/react-dom@19.2.8?external=react",
+          "react-dom/client": "https://esm.sh/react-dom@19.2.8/client?external=react",
+          "react/jsx-runtime": "https://esm.sh/react@19.2.8/jsx-runtime"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

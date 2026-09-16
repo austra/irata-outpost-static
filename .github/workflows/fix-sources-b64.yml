@@ -1,0 +1,40 @@
+name: fix-sources-b64
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/fix-sources-b64.yml"
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply exact byte patches
+        run: |
+          python3 << 'PY'
+          from pathlib import Path
+          a = list(Path("sources.a.b64").read_text())
+          a[313] = "N"
+          a[4429] = "9"
+          a[14741] = "1"
+          Path("sources.a.b64").write_text("".join(a))
+          b = Path("sources.b.b64").read_text()
+          b = b[:18970] + "p" + b[18971:]
+          b = b[:11633] + "r" + b[11634:]
+          b = b[:10837] + "k" + b[10837:]
+          b = b[:10583] + "E" + b[10583:]
+          b = b[:7741] + "O" + b[7742:]
+          b = b[:5050] + "X" + b[5052:]
+          b = b[:762] + "J" + b[763:]
+          Path("sources.b.b64").write_text(b)
+          print("patched", len("".join(a)), len(b))
+          PY
+      - name: Commit exact files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add sources.a.b64 sources.b.b64
+          git diff --cached --quiet || git commit -m "Add Irata Outpost Next.js source tarball (base64 halves)."
+          git push
